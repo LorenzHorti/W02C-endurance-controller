@@ -189,7 +189,7 @@ int main(void)
 							ccw_pulse_ctr = 0;
 							rev_count_inc = 0;
 							ramp_OCR1A = 0;
-							if (!CHECKBIT(flag_motor2, MOTOR_2_DIR_CW))
+							if (ccw_setcnt_val == 0)	// if ccw value is zero
 							{
 								cyccnt_ctr++;
 								if (cyccnt_ctr>= cyc_cnt_val)
@@ -198,10 +198,25 @@ int main(void)
 									SETBIT(flag_switch, flag_stop);
 									CLEARBIT(flag_switch, flag_start);
 									CLEARBIT(flag_switch, flag_param_saved);
-									SETBIT(flag_motor2, MOTOR_2_DIR_CW);
+									SETBIT(flag_motor2, MOTOR_2_DIR_CW);	
 								}
 							}
-							FLIPBIT(flag_motor2, MOTOR_2_DIR_CW);
+							else
+							{
+								if (!CHECKBIT(flag_motor2, MOTOR_2_DIR_CW))
+								{
+									cyccnt_ctr++;
+									if (cyccnt_ctr>= cyc_cnt_val)
+									{
+										cyccnt_ctr=0;
+										SETBIT(flag_switch, flag_stop);
+										CLEARBIT(flag_switch, flag_start);
+										CLEARBIT(flag_switch, flag_param_saved);
+										SETBIT(flag_motor2, MOTOR_2_DIR_CW);
+									}
+								}
+								FLIPBIT(flag_motor2, MOTOR_2_DIR_CW);
+							}
 						}
 					}
 				break;

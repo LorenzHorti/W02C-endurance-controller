@@ -10,3 +10,13 @@ added after ramp_inc_dec = op_spd_val/ramp_steps;
 	}
 *** code ***
 --------------------------------------------
+
+
+07/29/2020
+In main.c file 
+added condition in case MOTOR_1_DECEL:
+*** code ***
+	if (ccw_setcnt_val == 0)	// if ccw value is zero
+*** code *** 
+surrounded condition "if(!CHECKBIT(flag_motor2, MOTOR_2_DIR_CW))"
+with else of former condition (if ccw_setcnt_val == 0) which will occur only if ccw_setcnt_val !=0
