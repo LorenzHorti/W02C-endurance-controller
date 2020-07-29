@@ -1,0 +1,12 @@
+2/20/2020
+In motor.c file
+
+added code inside void motor_set_param()
+added after ramp_inc_dec = op_spd_val/ramp_steps;
+*** code ***
+	if (!ccw_setcnt_val)
+	{
+		CLEARBIT(flag_motor2,MOTOR_2_DIR_CW);
+	}
+*** code ***
+--------------------------------------------
